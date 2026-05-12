@@ -1,0 +1,12 @@
+gtk-single-instance = true
+
+font-family = Perfect DOS VGA 437
+font-size = 14
+
+# ghostty +list-themes to change theme
+theme ="iTerm2 Dark Background"
+
+term = xterm-256color
+cursor-style = block
+#foreground="#AA5500"
+command = tmux new-session -A 
