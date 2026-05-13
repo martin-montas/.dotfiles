@@ -38,9 +38,6 @@ vim.keymap.set("n", "-", ":Ex<CR>", { desc = "Open parent directory" })
 map('v','J', ":m '>+1<CR>gv=gv")
 map('v','K', ":m '>-2<CR>gv=gv")
 
-vim.keymap.set("n", "<leader>m", ":Trouble diagnostics<CR>",
- {silent = true, noremap = true}
-)
 vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<C-l>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
 vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
@@ -50,7 +47,7 @@ vim.keymap.set('n', '<C-g>', ':RenderMardown toggle<CR>')
 vim.keymap.set('c', '<C-l>', "<C-Right>")
 vim.keymap.set('c', '<C-h>', "<C-Left>")
 
-vim.keymap.set("n", "<leader>m", "<cmd>Telescope diagnostics<CR>", { desc = "diagnostics" })
+vim.keymap.set("n", "<leader>m", "<cmd>Trouble diagnostics toggle<cr>", { desc = "diagnostics" })
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
