@@ -32,7 +32,7 @@ bindkey "^J" accept-line
 alias vim='nvim'
 alias v='nvim'
 alias ts='tailscale'
-alias em='emacs'
+alias em='emacs -nw'
 alias vi='nvim'
 
 alias ts='tailscale'
