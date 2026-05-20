@@ -53,3 +53,14 @@ vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+
+vim.keymap.set("n", "<leader>o", function()
+  local url = vim.fn.expand("<cfile>")
+
+  vim.fn.jobstart({
+    "librewolf",
+    url
+  }, {
+    detach = true
+  })
+end)

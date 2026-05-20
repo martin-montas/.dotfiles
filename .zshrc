@@ -1,17 +1,21 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:$HOME/.local/bin:/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
+export PATH=$HOME/.cargo/bin:$PATH
+export GOPATH=~/go/
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:~/.dotbare
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export TERM=xterm-256color
-export PATH=$PATH:~/.dotbare
 export KUBECONFIG=$HOME/.kube/config
 export EDITOR='nvim'
 export MOZ_ENABLE_WAYLAND=1
+export BROWSER=librewolf
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="eastwood"
 
-export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 
 plugins=(git systemd)
 
@@ -42,6 +46,8 @@ alias ls='eza  --icons --group-directories-first'    # show hidden files
 alias lt='eza -T --icons'                               # tree view
 alias dotbare="$HOME/.dotbare/dotbare"
 
+fn() { ${EDITOR:-nvim} $(rg -n '.*' "$HOME/personal/slipbox" | fzf --layout=reverse --height 50% --ansi | sed -E 's/(.*):([0-9]+):.*/\1 +\2/g'); }
+
 alias gs='git status'
 alias k='kubectl'
 
@@ -55,11 +61,7 @@ XDG_SESSION_TYPE=wayland
 #eval "$(oh-my-posh init zsh)"
 # eval "$(oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/wholespace.omp.json)"
 bindkey -v
-alias ks="kubectl config --kubeconfig=$HOME/.kube/config use-context staging-context"
-alias kp="kubectl config --kubeconfig=$HOME/.kube/config use-context production-context"
-
 export LS_COLORS="di=38;2;135;206;250"
-export PATH=$HOME/.cargo/bin:$PATH
 
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"

@@ -30,6 +30,8 @@ o.wrap = true
 o.textwidth = 300
 o.tabstop = 4
 
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = "nc"
 o.shiftwidth = 0
 o.softtabstop = -1 -- If negative, shiftwidth value is used
 o.list = false
@@ -40,6 +42,7 @@ o.clipboard = "unnamedplus"
 o.ignorecase = true
 o.smartcase = true
 g.colorcolumn = true
+vim.g.netrw_browsex_viewer = "librewolf"
 
 -- Undo and backup options
 o.backup = false
