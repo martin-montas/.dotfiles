@@ -12,7 +12,7 @@ export TERM=xterm-256color
 export KUBECONFIG=$HOME/.kube/config
 export EDITOR='nvim'
 export MOZ_ENABLE_WAYLAND=1
-export BROWSER=librewolf
+
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="eastwood"
 

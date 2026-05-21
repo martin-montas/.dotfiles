@@ -29,7 +29,8 @@
         magit
         go-mode
         doom-themes
-        vterm))
+        vterm
+        company))
 
 ;;; =========================
 ;;; ui basics
@@ -54,7 +55,7 @@
 ;;; completion
 ;;; =========================
 
-(fido-vertical-mode 1)
+(add-hook 'after-init-hook #'global-company-mode)
 
 ;;; =========================
 ;;; recent files
@@ -77,7 +78,7 @@
 (evil-collection-init)
 
 ;;; =========================
-;;; leader key
+;;; leader key (MUST BE BEFORE USAGE)
 ;;; =========================
 
 (defvar my/leader-map (make-sparse-keymap)
@@ -86,6 +87,29 @@
 (define-key evil-normal-state-map (kbd "SPC") my/leader-map)
 (define-key evil-visual-state-map (kbd "SPC") my/leader-map)
 (define-key evil-motion-state-map (kbd "SPC") my/leader-map)
+(define-key evil-insert-state-map (kbd "C-SPC") my/leader-map)
+
+;;; =========================
+;;; org
+;;; =========================
+
+(require 'org)
+
+(setq org-directory "~/personal/slipbox/org/")
+(setq org-agenda-files '("~/personal/slipbox/org/"))
+
+(setq org-capture-templates
+      '(("t" "Task" entry
+         (file "~/personal/slipbox/org/tasks.org")
+         "* TODO %?\n  %U")))
+
+(define-key my/leader-map (kbd "oa") #'org-agenda)
+(define-key my/leader-map (kbd "oc") #'org-capture)
+
+(define-key my/leader-map (kbd "ot")
+  (lambda ()
+    (interactive)
+    (org-capture nil "t")))
 
 ;;; =========================
 ;;; file navigation
@@ -101,6 +125,7 @@
 ;;; =========================
 ;;; buffers
 ;;; =========================
+
 (define-key my/leader-map (kbd "bb") #'switch-to-buffer)
 (define-key my/leader-map (kbd "bd") #'kill-current-buffer)
 
@@ -168,7 +193,6 @@
 
 (setq backup-files nil)
 (setq auto-save-default nil)
-
 (setq make-backup-files nil)
 
 ;;; =========================
@@ -180,6 +204,9 @@
 
 (load custom-file 'noerror)
 
+;;; =========================
+;;; mode line styling
+;;; =========================
 
 (set-face-attribute 'mode-line nil
   :background "#1e1e1e"
@@ -191,9 +218,11 @@
   :foreground "#888888"
   :box nil)
 
+;;; =========================
+;;; PATH (go)
+;;; =========================
+
 (setenv "PATH"
         (concat (getenv "PATH") ":"
                 (expand-file-name "~/go/bin")))
 (add-to-list 'exec-path (expand-file-name "~/go/bin"))
-
-(add-hook 'after-init-hook 'global-company-mode)
