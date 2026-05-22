@@ -1,4 +1,4 @@
-;;; =========================
+;; =========================
 ;;; package system
 ;;; =========================
 (require 'package)
@@ -25,32 +25,22 @@
       '(evil
         evil-collection
         magit
-	vertico
-	consult
-	orderless
-	marginalia
+        vertico
+        general
+        consult
+        orderless
+        marginalia
         go-mode
-	rust-mode
+        rust-mode
         doom-themes
         vterm
-        company))
+        company
+        lsp-mode
+        project))
 
 ;;; =========================
-;;; ui basics
+;;; UI
 ;;; =========================
-;; Vertico
-(vertico-mode)
-
-;; Marginalia
-(marginalia-mode)
-
-;; Better completion matching
-(setq completion-styles '(orderless basic))
-
-;; Preview while moving
-(setq consult-preview-key 'any)
-
-
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -60,33 +50,30 @@
 
 (setq inhibit-startup-screen t)
 
-(load-theme 'doom-tomorrow-night t)
+(load-theme 'doom-1337 t)
 
 (set-face-attribute 'default nil
-                    :font "Perfect DOS VGA 437-17")
+                    :font "Iosevka 17")
+
 ;;; =========================
-;;; completion
+;;; completion stack
 ;;; =========================
+(vertico-mode 1)
+(marginalia-mode 1)
+(recentf-mode 1)
+
+(setq completion-styles '(orderless basic))
+(setq completion-category-overrides nil)
+(setq consult-preview-key 'any)
 
 (add-hook 'after-init-hook #'global-company-mode)
 
 ;;; =========================
-;;; recent files
+;;; EVIL
 ;;; =========================
-
-(recentf-mode 1)
-
-;;; =========================
-;;; evil
-;;; =========================
-
 (setq evil-want-integration t)
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll t)
-(with-eval-after-load 'vertico
-  (define-key vertico-map (kbd "C-j") #'vertico-next)
-  (define-key vertico-map (kbd "C-k") #'vertico-previous))
-
 
 (require 'evil)
 (evil-mode 1)
@@ -95,19 +82,54 @@
 (evil-collection-init)
 
 ;;; =========================
-;;; leader key (MUST BE BEFORE USAGE)
+;;; IMPORTANT: free SPC from Evil/others
 ;;; =========================
-
-(defvar my/leader-map (make-sparse-keymap)
-  "Leader keymap.")
-
-(define-key evil-normal-state-map (kbd "SPC") my/leader-map)
-(define-key evil-visual-state-map (kbd "SPC") my/leader-map)
-(define-key evil-motion-state-map (kbd "SPC") my/leader-map)
-(define-key evil-insert-state-map (kbd "C-SPC") my/leader-map)
+(define-key evil-normal-state-map (kbd "SPC") nil)
+(define-key evil-visual-state-map (kbd "SPC") nil)
+(define-key evil-motion-state-map (kbd "SPC") nil)
 
 ;;; =========================
-;;; org
+;;; LEADER (ONLY SYSTEM USED)
+;;; =========================
+(require 'general)
+(setq completion-styles '(orderless basic))
+(setq completion-ignore-case t)
+
+
+(setq consult-fd-args
+      "fdfind --color=never --hidden --ignore-case")
+
+(setq completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+
+(general-create-definer my/leader
+  :states '(normal visual motion)
+  :keymaps 'override
+  :prefix "SPC")
+
+(my/leader
+  "ff" #'consult-fd
+  "fg" #'consult-ripgrep
+  "fb" #'consult-buffer
+  "fr" #'consult-recent-file
+  "fp" #'project-find-file
+  "pp" #'project-dired
+  "-"  #'dired
+  "gg" #'magit-status
+  "tt" #'vterm
+  "cc" #'my/compile-default
+  "bb" #'switch-to-buffer
+  "bd" #'kill-current-buffer
+  "fe" #'dired-create-empty-file
+  "h" #'windmove-left
+  "j" #'windmove-down
+  "k" #'windmove-up
+  "l" #'windmove-right
+  "oa" #'org-agenda
+  "oc" #'org-capture)
+
+;;; =========================
+;;; ORG
 ;;; =========================
 (require 'org)
 
@@ -119,53 +141,7 @@
          (file "~/personal/slipbox/org/tasks.org")
          "* TODO %?\n  %U")))
 
-(define-key my/leader-map (kbd "oa") #'org-agenda)
-(define-key my/leader-map (kbd "oc") #'org-capture)
-
-(define-key my/leader-map (kbd "ot")
-  (lambda ()
-    (interactive)
-    (org-capture nil "t")))
-
 (evil-set-initial-state 'org-mode 'normal)
-
-;;; =========================
-;;; file navigation
-;;; =========================
-(require 'project)
-
-(define-key my/leader-map (kbd "ff") #'project-find-file)
-(define-key my/leader-map (kbd "pp") #'project-dired)
-(define-key my/leader-map (kbd "fr") #'recentf-open-files)
-
-;;; =========================
-;;; buffers
-;;; =========================
-(define-key my/leader-map (kbd "bb") #'switch-to-buffer)
-(define-key my/leader-map (kbd "bd") #'kill-current-buffer)
-
-;;; =========================
-;;; windows
-;;; =========================
-(define-key my/leader-map (kbd "h") #'windmove-left)
-(define-key my/leader-map (kbd "j") #'windmove-down)
-(define-key my/leader-map (kbd "k") #'windmove-up)
-(define-key my/leader-map (kbd "l") #'windmove-right)
-
-;;; =========================
-;;; dired
-;;; =========================
-(define-key my/leader-map (kbd "-") #'dired)
-
-;;; =========================
-;;; magit
-;;; =========================
-(define-key my/leader-map (kbd "gg") #'magit-status)
-
-;;; =========================
-;;; terminal
-;;; =========================
-(define-key my/leader-map (kbd "tt") #'vterm)
 
 ;;; =========================
 ;;; compile
@@ -175,17 +151,8 @@
   (let ((compilation-read-command nil))
     (compile compile-command)))
 
-(define-key my/leader-map (kbd "cc") #'my/compile-default)
 ;;; =========================
-;;; config shortcut
-;;; =========================
-(define-key my/leader-map (kbd "fc")
-  (lambda ()
-    (interactive)
-    (find-file user-init-file)))
-
-;;; =========================
-;;; go development
+;;; GO
 ;;; =========================
 (require 'go-mode)
 
@@ -193,41 +160,21 @@
 
 (add-hook 'go-mode-hook
           (lambda ()
-            (add-hook 'before-save-hook
-                      #'gofmt-before-save
-                      nil
-                      t)))
+            (add-hook 'before-save-hook #'gofmt-before-save nil t)))
 
 ;;; =========================
 ;;; misc
 ;;; =========================
-(setq backup-files nil)
-(setq auto-save-default nil)
 (setq make-backup-files nil)
+(setq auto-save-default nil)
 
-;;; =========================
-;;; custom file
-;;; =========================
 (setq custom-file
       (expand-file-name "custom.el" user-emacs-directory))
 
 (load custom-file 'noerror)
 
 ;;; =========================
-;;; mode line styling
-;;; =========================
-(set-face-attribute 'mode-line nil
-  :background "#1e1e1e"
-  :foreground "#ffffff"
-  :box nil)
-
-(set-face-attribute 'mode-line-inactive nil
-  :background "#2d2d2d"
-  :foreground "#888888"
-  :box nil)
-
-;;; =========================
-;;; PATH (go)
+;;; PATH
 ;;; =========================
 (setenv "PATH"
         (concat (getenv "PATH") ":"
@@ -236,20 +183,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
-(require 'lsp-mode)
-(add-hook 'c-mode-hook #'lsp)
-(add-hook 'c++-mode-hook #'lsp)
-
 (setq warning-minimum-level :error)
-;;(tab-bar-mode 1)
-(add-hook 'after-init-hook #'tab-bar-mode)
-(global-tab-line-mode 1)
-
-(setq-default indent-tabs-mode nil) ;; optional: spaces instead of tabs
-(tab-bar-mode 1)
-(global-tab-line-mode 1)
+(setq-default indent-tabs-mode nil)
 (setq tab-width 4)
-(setq evil-indent-convert-tabs nil)
 
 (with-eval-after-load 'evil
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop))
+
