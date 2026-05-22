@@ -54,6 +54,16 @@
 
 (set-face-attribute 'default nil
                     :font "Iosevka 17")
+(set-face-attribute 'mode-line nil
+                    :background "#282828"
+                    :foreground "#ebdbb2"
+                    :box nil)
+
+(set-face-attribute 'mode-line-inactive nil
+                    :background "#1d2021"
+                    :foreground "#928374"
+                    :box nil)
+
 
 ;;; =========================
 ;;; completion stack
