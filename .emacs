@@ -118,6 +118,10 @@
   :prefix "SPC")
 
 (my/leader
+  "h"  #'windmove-left
+  "j"  #'windmove-down
+  "k"  #'windmove-up
+  "l"  #'windmove-right
   "ff" #'consult-fd
   "fg" #'consult-ripgrep
   "fb" #'consult-buffer
@@ -131,12 +135,13 @@
   "bb" #'switch-to-buffer
   "bd" #'kill-current-buffer
   "fe" #'dired-create-empty-file
-  "h" #'windmove-left
-  "j" #'windmove-down
-  "k" #'windmove-up
-  "l" #'windmove-right
   "oa" #'org-agenda
   "oc" #'org-capture)
+
+(with-eval-after-load 'vertico
+  (define-key vertico-map (kbd "C-j") #'vertico-next)
+  (define-key vertico-map (kbd "C-k") #'vertico-previous))
+
 
 ;;; =========================
 ;;; ORG
@@ -199,4 +204,3 @@
 
 (with-eval-after-load 'evil
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop))
-
