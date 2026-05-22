@@ -1,7 +1,6 @@
 ;;; =========================
 ;;; package system
 ;;; =========================
-
 (require 'package)
 
 (setq package-enable-at-startup nil)
@@ -22,7 +21,6 @@
 ;;; =========================
 ;;; packages
 ;;; =========================
-
 (mapc #'ensure-package
       '(evil
         evil-collection
@@ -65,9 +63,7 @@
 (load-theme 'doom-tomorrow-night t)
 
 (set-face-attribute 'default nil
-                    :font "Hack"
-                    :height 135)
-
+                    :font "Perfect DOS VGA 437-17")
 ;;; =========================
 ;;; completion
 ;;; =========================
@@ -131,14 +127,15 @@
     (interactive)
     (org-capture nil "t")))
 
+(evil-set-initial-state 'org-mode 'normal)
+
 ;;; =========================
 ;;; file navigation
 ;;; =========================
 (require 'project)
 
-(define-key my/leader-map (kbd "ff") #'find-file)
-(define-key my/leader-map (kbd "pf") #'project-find-file)
-(define-key my/leader-map (kbd "pp") #'project-switch-project)
+(define-key my/leader-map (kbd "ff") #'project-find-file)
+(define-key my/leader-map (kbd "pp") #'project-dired)
 (define-key my/leader-map (kbd "fr") #'recentf-open-files)
 
 ;;; =========================
@@ -158,7 +155,7 @@
 ;;; =========================
 ;;; dired
 ;;; =========================
-(define-key my/leader-map (kbd "-") #'consult-find)
+(define-key my/leader-map (kbd "-") #'dired)
 
 ;;; =========================
 ;;; magit
@@ -238,3 +235,21 @@
 (add-to-list 'exec-path (expand-file-name "~/go/bin"))
 
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+(require 'lsp-mode)
+(add-hook 'c-mode-hook #'lsp)
+(add-hook 'c++-mode-hook #'lsp)
+
+(setq warning-minimum-level :error)
+;;(tab-bar-mode 1)
+(add-hook 'after-init-hook #'tab-bar-mode)
+(global-tab-line-mode 1)
+
+(setq-default indent-tabs-mode nil) ;; optional: spaces instead of tabs
+(tab-bar-mode 1)
+(global-tab-line-mode 1)
+(setq tab-width 4)
+(setq evil-indent-convert-tabs nil)
+
+(with-eval-after-load 'evil
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop))
