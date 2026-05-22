@@ -27,7 +27,12 @@
       '(evil
         evil-collection
         magit
+	vertico
+	consult
+	orderless
+	marginalia
         go-mode
+	rust-mode
         doom-themes
         vterm
         company))
@@ -35,6 +40,18 @@
 ;;; =========================
 ;;; ui basics
 ;;; =========================
+;; Vertico
+(vertico-mode)
+
+;; Marginalia
+(marginalia-mode)
+
+;; Better completion matching
+(setq completion-styles '(orderless basic))
+
+;; Preview while moving
+(setq consult-preview-key 'any)
+
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -70,6 +87,10 @@
 (setq evil-want-integration t)
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll t)
+(with-eval-after-load 'vertico
+  (define-key vertico-map (kbd "C-j") #'vertico-next)
+  (define-key vertico-map (kbd "C-k") #'vertico-previous))
+
 
 (require 'evil)
 (evil-mode 1)
@@ -92,7 +113,6 @@
 ;;; =========================
 ;;; org
 ;;; =========================
-
 (require 'org)
 
 (setq org-directory "~/personal/slipbox/org/")
@@ -114,7 +134,6 @@
 ;;; =========================
 ;;; file navigation
 ;;; =========================
-
 (require 'project)
 
 (define-key my/leader-map (kbd "ff") #'find-file)
@@ -125,14 +144,12 @@
 ;;; =========================
 ;;; buffers
 ;;; =========================
-
 (define-key my/leader-map (kbd "bb") #'switch-to-buffer)
 (define-key my/leader-map (kbd "bd") #'kill-current-buffer)
 
 ;;; =========================
 ;;; windows
 ;;; =========================
-
 (define-key my/leader-map (kbd "h") #'windmove-left)
 (define-key my/leader-map (kbd "j") #'windmove-down)
 (define-key my/leader-map (kbd "k") #'windmove-up)
@@ -141,32 +158,30 @@
 ;;; =========================
 ;;; dired
 ;;; =========================
-
-(define-key my/leader-map (kbd "-") #'dired)
+(define-key my/leader-map (kbd "-") #'consult-find)
 
 ;;; =========================
 ;;; magit
 ;;; =========================
-
 (define-key my/leader-map (kbd "gg") #'magit-status)
 
 ;;; =========================
 ;;; terminal
 ;;; =========================
-
-(with-eval-after-load 'vterm
-  (define-key my/leader-map (kbd "tt") #'vterm))
+(define-key my/leader-map (kbd "tt") #'vterm)
 
 ;;; =========================
 ;;; compile
 ;;; =========================
+(defun my/compile-default ()
+  (interactive)
+  (let ((compilation-read-command nil))
+    (compile compile-command)))
 
-(define-key my/leader-map (kbd "cc") #'compile)
-
+(define-key my/leader-map (kbd "cc") #'my/compile-default)
 ;;; =========================
 ;;; config shortcut
 ;;; =========================
-
 (define-key my/leader-map (kbd "fc")
   (lambda ()
     (interactive)
@@ -175,7 +190,6 @@
 ;;; =========================
 ;;; go development
 ;;; =========================
-
 (require 'go-mode)
 
 (add-hook 'go-mode-hook #'eglot-ensure)
@@ -190,7 +204,6 @@
 ;;; =========================
 ;;; misc
 ;;; =========================
-
 (setq backup-files nil)
 (setq auto-save-default nil)
 (setq make-backup-files nil)
@@ -198,7 +211,6 @@
 ;;; =========================
 ;;; custom file
 ;;; =========================
-
 (setq custom-file
       (expand-file-name "custom.el" user-emacs-directory))
 
@@ -207,7 +219,6 @@
 ;;; =========================
 ;;; mode line styling
 ;;; =========================
-
 (set-face-attribute 'mode-line nil
   :background "#1e1e1e"
   :foreground "#ffffff"
@@ -221,8 +232,9 @@
 ;;; =========================
 ;;; PATH (go)
 ;;; =========================
-
 (setenv "PATH"
         (concat (getenv "PATH") ":"
                 (expand-file-name "~/go/bin")))
 (add-to-list 'exec-path (expand-file-name "~/go/bin"))
+
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
