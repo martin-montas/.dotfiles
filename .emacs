@@ -53,7 +53,7 @@
 (load-theme 'doom-1337 t)
 
 (set-face-attribute 'default nil
-                    :font "Iosevka 17")
+                    :font "Iosevka 14")
 (set-face-attribute 'mode-line nil
                     :background "#282828"
                     :foreground "#ebdbb2"
@@ -63,7 +63,6 @@
                     :background "#1d2021"
                     :foreground "#928374"
                     :box nil)
-
 
 ;;; =========================
 ;;; completion stack
@@ -107,7 +106,7 @@
 
 
 (setq consult-fd-args
-      "fdfind --color=never --hidden --ignore-case")
+      "fdfind --color=never --hidden --follow --type f --exclude .git")
 
 (setq completion-ignore-case t)
 (setq read-file-name-completion-ignore-case t)
@@ -137,11 +136,6 @@
   "fe" #'dired-create-empty-file
   "oa" #'org-agenda
   "oc" #'org-capture)
-
-(with-eval-after-load 'vertico
-  (define-key vertico-map (kbd "C-j") #'vertico-next)
-  (define-key vertico-map (kbd "C-k") #'vertico-previous))
-
 
 ;;; =========================
 ;;; ORG
