@@ -123,6 +123,11 @@
   (define-key vertico-map (kbd "C-j") #'vertico-next)
   (define-key vertico-map (kbd "C-k") #'vertico-previous))
 
+(defun my/open-notes ()
+  (interactive)
+  (find-file "~/personal/slipbox/org/tasks.org"))
+
+
 ;;; =========================
 ;;; LEADER KEY
 ;;; =========================
@@ -132,7 +137,8 @@
       "fdfind --color=never --hidden --follow --type f --exclude .git")
 
 (general-create-definer my/leader
-  :states '(normal visual motion)
+  :states '(normal visu
+al motion)
   :keymaps 'override
   :prefix "SPC")
 
@@ -146,10 +152,10 @@
   "fg" #'consult-ripgrep
   "fb" #'consult-buffer
   "fr" #'consult-recent-file
+  "oo" #'my/open-notes
 
   "fp" #'project-find-file
-  "pp" #'project-dired
-
+  "pp" #'consult-project-buffer
   "-"  #'dired
   "gg" #'magit-status
   "tt" #'vterm
