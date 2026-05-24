@@ -4,7 +4,7 @@ local g = vim.g
 vim.api.nvim_command("set jumpoptions+=view")
 vim.api.nvim_command("set nowrap")
 vim.api.nvim_command("filetype plugin indent on")
-o.termguicolors = false
+o.termguicolors = true
 g.background = "dark"
 vim.api.nvim_command("syntax on")
 -- Decrease update time
@@ -21,10 +21,7 @@ o.relativenumber = true
 o.signcolumn = "yes:2"
 o.cursorline = true
 
-
-
-vim.api.nvim_command('colorscheme default')
-
+-- vim.api.nvim_command('colorscheme forest_stream')
 -- Better editing experience
 o.expandtab = true
 o.smarttab = true
@@ -88,19 +85,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'go' ,'python', 'lua', 'bash', "c","cpp" , "asm", "python"},
+  pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python"},
   callback = function() vim.treesitter.start() end,
 })
 
 vim.opt.hlsearch = true
-vim.api.nvim_command('hi cursorLine guibg=#4B1E22')
-vim.api.nvim_command("hi Normal guibg=#808080")
-vim.api.nvim_command('hi StatusLine guibg=#101010 guifg=#131313')
-vim.api.nvim_command('set laststatus=0')
+-- vim.api.nvim_command('set laststatus=0')
 
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
 vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
-
-
-
