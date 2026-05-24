@@ -51,6 +51,7 @@ fn() { ${EDITOR:-nvim} $(rg -n '.*' "$HOME/personal/slipbox" | fzf --layout=reve
 alias gs='git status'
 alias k='kubectl'
 
+alias db='dotbare'
 
 paste_from_clipboard() { LBUFFER+=$(wl-paste); }
 zle -N paste_from_clipboard
