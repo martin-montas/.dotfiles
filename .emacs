@@ -21,8 +21,16 @@
 ;;; =========================
 ;;; packages
 ;;; =========================
+
+(defun my/ff-cwd ()
+  (interactive)
+  (consult-find
+   (if buffer-file-name
+       (file-name-directory buffer-file-name)
+     default-directory)))
+
 (mapc #'ensure-package
-      '(evil
+       '(evil
         evil-collection
         magit
         evil-org
@@ -45,14 +53,14 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-
+(tab-bar-mode 1)
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
 (setq inhibit-startup-screen t)
 
 (set-face-attribute 'default nil
-                    :font "Hack 14")
+                    :font "Iosevka 15")
 
 (add-hook 'c++-mode-hook
           (lambda ()
@@ -65,6 +73,7 @@
           (lambda ()
             (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
 
+(require 'consult-project-extra)
 
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
@@ -78,8 +87,8 @@
         (fg-mode-line-active "#131313")
         (bg-mode-line-inactive "#2b2b2b")
         (fg-mode-line-inactive "#888888")))
-(load-theme 'modus-vivendi t)
-(set-face-attribute 'mode-line nil :background "#939393" :foreground "#131313")
+(load-theme 'modus-vivendi-tritanopia t)
+(set-face-attribute 'mode-line nil :background "#000000" :foreground "#939393")
 ;;; =========================
 ;;; EVIL CORE
 ;;; =========================
@@ -127,14 +136,14 @@
   (interactive)
   (find-file "~/personal/slipbox/org/tasks.org"))
 
+(defun my/dired-here ()
+  (interactive)
+  (dired default-directory))
 
 ;;; =========================
 ;;; LEADER KEY
 ;;; =========================
 (require 'general)
-
-(setq consult-fd-args
-      "fdfind --color=never --hidden --follow --type f --exclude .git")
 
 (general-create-definer my/leader
   :states '(normal visu
@@ -142,29 +151,43 @@ al motion)
   :keymaps 'override
   :prefix "SPC")
 
+(with-eval-after-load 'evil
+  (evil-define-key 'normal 'global
+    (kbd "Q") #'evil-execute-last-recorded-macro))
+
 (my/leader
   "h"  #'windmove-left
   "j"  #'windmove-down
   "k"  #'windmove-up
   "l"  #'windmove-right
 
-  "ff" #'consult-fd
+  "ff" #'consult-projectile-find-file
   "fg" #'consult-ripgrep
   "fb" #'consult-buffer
   "fr" #'consult-recent-file
-  "oo" #'my/open-notes
-
+  "fe" #'dired-create-empty-file
   "fp" #'project-find-file
-  "pp" #'consult-project-buffer
-  "-"  #'dired
+
+  "p" #'project-switch-project
+  "-"  #'my/dired-here
   "gg" #'magit-status
   "tt" #'vterm
+  "tt" #'vterm
 
-  "cc" #'compile
+  "c" #'projectile-compile-project
   "bb" #'switch-to-buffer
   "bd" #'kill-current-buffer
+  "1" (lambda () (interactive) (tab-bar-select-tab 1))
+  "2" (lambda () (interactive) (tab-bar-select-tab 2))
+  "3" (lambda () (interactive) (tab-bar-select-tab 3))
+  "4" (lambda () (interactive) (tab-bar-select-tab 4))
 
-  "fe" #'dired-create-empty-file
+  "tc" #'tab-bar-new-tab
+  "tx" #'tab-bar-close-tab
+  "tn" #'tab-bar-switch-to-prev-tab
+  "tr" #'tab-bar-rename-tab
+
+  "oo" #'my/open-notes
   "oa" #'org-agenda
   "oc" #'org-capture)
 
@@ -180,6 +203,26 @@ al motion)
       '(("t" "Task" entry
          (file "~/personal/slipbox/org/tasks.org")
          "* TODO %?\n  %U")))
+(setq org-todo-keywords
+      '((sequence
+         "TODO"
+         "IN-PROGRESS"
+         "WAITING"
+         "BLOCKED"
+         "IMPLEMENTING"
+         "DEBUGGING"
+         "TESTING"
+         "DONE"
+         "CANCELLED")))
+(setq org-todo-keyword-faces
+      '(("IMPLEMENTING" . "orange")
+        ("DEBUGGING"     . "red")
+        ("IN-PROGRESS"     . "red")
+        ("BLOCKED"     . "teal")
+        ("WAITING"     . "magenta")
+        ("CANCELLED"     . "blue")
+        ("DONE"     . "green")
+        ("TESTING"       . "yellow")))
 
 ;;; =========================
 ;;; compile

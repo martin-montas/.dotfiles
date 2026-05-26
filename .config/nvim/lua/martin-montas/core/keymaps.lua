@@ -38,10 +38,6 @@ vim.keymap.set("n", "-", ":Ex<CR>", { desc = "Open parent directory" })
 map('v','J', ":m '>+1<CR>gv=gv")
 map('v','K', ":m '>-2<CR>gv=gv")
 
-vim.keymap.set('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-vim.keymap.set('i', '<C-l>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-vim.keymap.set('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-vim.keymap.set('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
 vim.keymap.set('n', '<C-g>', ':RenderMardown toggle<CR>')
 
 vim.keymap.set('c', '<C-l>', "<C-Right>")
@@ -64,3 +60,13 @@ vim.keymap.set("n", "<leader>o", function()
     detach = true
   })
 end)
+
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-s>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
