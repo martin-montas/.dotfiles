@@ -91,7 +91,7 @@
 
 ;; change the status line
 (setq modus-themes-common-palette-overrides
-      '((bg-mode-line-active "#000000")
+      '((bg-mode-line-active "#1c1c1c")
         (fg-mode-line-active "#939393")
         (border-mode-line-active unspecified)
 
