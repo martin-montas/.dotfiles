@@ -89,15 +89,28 @@
 ;;; =========================
 (require 'modus-themes)
 
+;; change the status line
 (setq modus-themes-common-palette-overrides
-      '((bg-mode-line "#888888")
-        (fg-mode-line "#131313")
-        (bg-mode-line-active "#888888")
-        (fg-mode-line-active "#131313")
-        (bg-mode-line-inactive "#2b2b2b")
-        (fg-mode-line-inactive "#888888")))
+      '((bg-mode-line-active "#000000")
+        (fg-mode-line-active "#939393")
+        (border-mode-line-active unspecified)
+
+        (bg-mode-line-inactive "#131313")
+        (fg-mode-line-inactive "#666666")
+        (border-mode-line-inactive unspecified)))
+
 (load-theme 'modus-vivendi-tritanopia t)
-(set-face-attribute 'mode-line nil :background "#000000" :foreground "#939393")
+
+(set-face-attribute 'mode-line nil
+                    :background "#000000"
+                    :foreground "#939393"
+                    :box nil)
+
+(set-face-attribute 'mode-line-inactive nil
+                    :background "#131313"
+                    :foreground "#666666"
+                    :box nil)
+
 ;;; =========================
 ;;; EVIL CORE
 ;;; =========================
