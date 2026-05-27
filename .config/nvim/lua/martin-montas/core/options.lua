@@ -4,7 +4,7 @@ local g = vim.g
 vim.api.nvim_command("set jumpoptions+=view")
 vim.api.nvim_command("set nowrap")
 vim.api.nvim_command("filetype plugin indent on")
-o.termguicolors = true
+o.termguicolors = false
 g.background = "dark"
 vim.api.nvim_command("syntax on")
 -- Decrease update time
@@ -21,7 +21,7 @@ o.relativenumber = true
 o.signcolumn = "yes:2"
 o.cursorline = true
 
--- vim.api.nvim_command('colorscheme forest_stream')
+vim.api.nvim_command('colorscheme default')
 -- Better editing experience
 o.expandtab = true
 o.smarttab = true

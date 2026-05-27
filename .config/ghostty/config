@@ -1,7 +1,7 @@
 gtk-single-instance = true
 
 font-family = Hack
-font-size = 16
+font-size = 14
 
 # ghostty +list-themes to change theme
 theme ="iTerm2 Dark Background"

@@ -39,6 +39,8 @@
         consult
         orderless
         marginalia
+        consult-project-extra
+        consult-projectile
         go-mode
         rust-mode
         vterm
@@ -74,6 +76,13 @@
             (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
 
 (require 'consult-project-extra)
+
+
+(defun my/tab-new ()
+  (interactive)
+  (tab-new)
+  (dired default-directory))
+
 
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
@@ -155,6 +164,11 @@ al motion)
   (evil-define-key 'normal 'global
     (kbd "Q") #'evil-execute-last-recorded-macro))
 
+(defun my/new-vterm ()
+  (interactive)
+  (vterm (generate-new-buffer-name "*vterm*")))
+
+
 (my/leader
   "h"  #'windmove-left
   "j"  #'windmove-down
@@ -171,8 +185,7 @@ al motion)
   "p" #'project-switch-project
   "-"  #'my/dired-here
   "gg" #'magit-status
-  "tt" #'vterm
-  "tt" #'vterm
+  "tt" #'my/new-vterm
 
   "c" #'projectile-compile-project
   "bb" #'switch-to-buffer
@@ -190,6 +203,23 @@ al motion)
   "oo" #'my/open-notes
   "oa" #'org-agenda
   "oc" #'org-capture)
+
+;; second leader on Ctrl-a
+  (general-create-definer my/ctrl-a-leader
+    :states '(normal visual emacs)
+    :keymaps 'override
+    :prefix "C-a")
+
+ ;; bindings
+(my/ctrl-a-leader
+    "c" #'my/tab-new
+    "n" #'tab-next
+    "1" (lambda () (interactive) (tab-bar-select-tab 1))
+    "2" (lambda () (interactive) (tab-bar-select-tab 2))
+    "3" (lambda () (interactive) (tab-bar-select-tab 3))
+    "4" (lambda () (interactive) (tab-bar-select-tab 4))
+    "5" (lambda () (interactive) (tab-bar-select-tab 5))
+    "d" #'tab-close)
 
 ;;; =========================
 ;;; ORG
@@ -214,6 +244,7 @@ al motion)
          "TESTING"
          "DONE"
          "CANCELLED")))
+
 (setq org-todo-keyword-faces
       '(("IMPLEMENTING" . "orange")
         ("DEBUGGING"     . "red")
