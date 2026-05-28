@@ -21,7 +21,6 @@
 ;;; =========================
 ;;; packages
 ;;; =========================
-
 (defun my/ff-cwd ()
   (interactive)
   (consult-find
@@ -59,6 +58,7 @@
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
+
 (setq inhibit-startup-screen t)
 
 (set-face-attribute 'default nil
@@ -83,33 +83,11 @@
   (tab-new)
   (dired default-directory))
 
-
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
-(require 'modus-themes)
 
-;; change the status line
-(setq modus-themes-common-palette-overrides
-      '((bg-mode-line-active "#1c1c1c")
-        (fg-mode-line-active "#939393")
-        (border-mode-line-active unspecified)
-
-        (bg-mode-line-inactive "#131313")
-        (fg-mode-line-inactive "#666666")
-        (border-mode-line-inactive unspecified)))
-
-(load-theme 'modus-vivendi-tritanopia t)
-
-(set-face-attribute 'mode-line nil
-                    :background "#000000"
-                    :foreground "#939393"
-                    :box nil)
-
-(set-face-attribute 'mode-line-inactive nil
-                    :background "#131313"
-                    :foreground "#666666"
-                    :box nil)
+(load-theme 'gruber-darker t)
 
 ;;; =========================
 ;;; EVIL CORE
@@ -190,7 +168,7 @@ al motion)
 
   "ff" #'consult-projectile-find-file
   "fg" #'consult-ripgrep
-  "fb" #'consult-buffer
+  "u" #'consult-buffer
   "fr" #'consult-recent-file
   "fe" #'dired-create-empty-file
   "fp" #'project-find-file
@@ -260,7 +238,7 @@ al motion)
 
 (setq org-todo-keyword-faces
       '(("IMPLEMENTING" . "orange")
-        ("DEBUGGING"     . "red")
+        ("DEBUGGING"     . "orange")
         ("IN-PROGRESS"     . "red")
         ("BLOCKED"     . "teal")
         ("WAITING"     . "magenta")
@@ -300,6 +278,8 @@ al motion)
 (load custom-file 'noerror)
 
 (setq use-short-answers t)
+(setq eww-search-prefix "https://startpage.com/?q=")
+
 
 ;;; =========================
 ;;; PATH
@@ -318,3 +298,5 @@ al motion)
 
 (with-eval-after-load 'evil
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop))
+
+(setq vterm-max-scrollback 10000)
