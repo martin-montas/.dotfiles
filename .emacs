@@ -77,7 +77,6 @@
 
 (require 'consult-project-extra)
 
-
 (defun my/tab-new ()
   (interactive)
   (tab-new)
@@ -101,6 +100,25 @@
 
 (require 'evil-collection)
 (evil-collection-init)
+
+(defun my/evil-quit-buffer ()
+  (interactive)
+  (kill-this-buffer))
+
+(defun my/evil-save-and-kill-buffer ()
+  (interactive)
+  (save-buffer)
+  (kill-this-buffer))
+
+(with-eval-after-load 'evil
+  ;; :q
+  (evil-ex-define-cmd "q" #'my/evil-quit-buffer)
+
+  ;; :q!
+  (evil-ex-define-cmd "q!" #'my/evil-quit-buffer)
+
+  ;; :wq
+  (evil-ex-define-cmd "wq" #'my/evil-save-and-kill-buffer))
 
 ;;; =========================
 ;;; EVIL ORG
@@ -168,17 +186,17 @@ al motion)
 
   "ff" #'consult-projectile-find-file
   "fg" #'consult-ripgrep
-  "u" #'consult-buffer
+  "u"  #'consult-buffer
   "fr" #'consult-recent-file
   "fe" #'dired-create-empty-file
-  "fp" #'project-find-file
+  "i"  #'find-file
 
-  "p" #'project-switch-project
+  "p"  #'consult-project-buffer
   "-"  #'my/dired-here
   "gg" #'magit-status
   "tt" #'my/new-vterm
 
-  "c" #'projectile-compile-project
+  "c"  #'projectile-compile-project
   "bb" #'switch-to-buffer
   "bd" #'kill-current-buffer
   "1" (lambda () (interactive) (tab-bar-select-tab 1))
@@ -192,8 +210,10 @@ al motion)
   "tr" #'tab-bar-rename-tab
 
   "oo" #'my/open-notes
+  "m"  #'flymake-show-project-diagnostics
   "oa" #'org-agenda
   "oc" #'org-capture)
+
 
 ;; second leader on Ctrl-a
   (general-create-definer my/ctrl-a-leader
@@ -233,6 +253,7 @@ al motion)
          "IMPLEMENTING"
          "DEBUGGING"
          "TESTING"
+         "NOTE"
          "DONE"
          "CANCELLED")))
 
@@ -240,6 +261,7 @@ al motion)
       '(("IMPLEMENTING" . "orange")
         ("DEBUGGING"     . "orange")
         ("IN-PROGRESS"     . "red")
+        ("NOTE"     . "magenta")
         ("BLOCKED"     . "teal")
         ("WAITING"     . "magenta")
         ("CANCELLED"     . "blue")
