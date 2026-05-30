@@ -59,10 +59,14 @@
 (setq display-line-numbers-type 'relative)
 
 
+(set-face-attribute 'default nil
+                    :font "Iosevka 15")
 (setq inhibit-startup-screen t)
 
 (set-face-attribute 'default nil
-                    :font "Iosevka 15")
+                    :family "Iosevka"
+                    :weight 'bold
+                    :height 150)
 
 (add-hook 'c++-mode-hook
           (lambda ()
@@ -100,25 +104,6 @@
 
 (require 'evil-collection)
 (evil-collection-init)
-
-(defun my/evil-quit-buffer ()
-  (interactive)
-  (kill-this-buffer))
-
-(defun my/evil-save-and-kill-buffer ()
-  (interactive)
-  (save-buffer)
-  (kill-this-buffer))
-
-(with-eval-after-load 'evil
-  ;; :q
-  (evil-ex-define-cmd "q" #'my/evil-quit-buffer)
-
-  ;; :q!
-  (evil-ex-define-cmd "q!" #'my/evil-quit-buffer)
-
-  ;; :wq
-  (evil-ex-define-cmd "wq" #'my/evil-save-and-kill-buffer))
 
 ;;; =========================
 ;;; EVIL ORG
@@ -173,9 +158,12 @@ al motion)
   (evil-define-key 'normal 'global
     (kbd "Q") #'evil-execute-last-recorded-macro))
 
+
 (defun my/new-vterm ()
   (interactive)
   (vterm (generate-new-buffer-name "*vterm*")))
+(setq consult-fd-args
+      "fd --color=never --full-path --hidden")
 
 
 (my/leader
@@ -184,14 +172,14 @@ al motion)
   "k"  #'windmove-up
   "l"  #'windmove-right
 
-  "ff" #'consult-projectile-find-file
+  "ff" #'projectile-find-file
   "fg" #'consult-ripgrep
   "u"  #'consult-buffer
   "fr" #'consult-recent-file
   "fe" #'dired-create-empty-file
   "i"  #'find-file
 
-  "p"  #'consult-project-buffer
+  "p"  #'project-switch-project
   "-"  #'my/dired-here
   "gg" #'magit-status
   "tt" #'my/new-vterm
@@ -275,6 +263,7 @@ al motion)
   (interactive)
   (let ((compilation-read-command nil))
     (compile compile-command)))
+
 
 ;;; =========================
 ;;; GO
