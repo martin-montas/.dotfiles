@@ -31,6 +31,7 @@
 (mapc #'ensure-package
        '(evil
         evil-collection
+        pulse
         magit
         evil-org
         vertico
@@ -55,6 +56,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (tab-bar-mode 1)
+(setq org-startup-folded 'content)
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 
@@ -86,11 +88,15 @@
   (tab-new)
   (dired default-directory))
 
+(setq projectile-project-root-files
+      '("makefile"))
+
+
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
 
-(load-theme 'gruber-darker t)
+(load-theme 'deeper-blue t)
 
 ;;; =========================
 ;;; EVIL CORE
@@ -291,6 +297,9 @@ al motion)
 (setq use-short-answers t)
 (setq eww-search-prefix "https://startpage.com/?q=")
 
+(use-package evil-goggles
+  :config
+  (evil-goggles-mode))
 
 ;;; =========================
 ;;; PATH
@@ -310,4 +319,11 @@ al motion)
 (with-eval-after-load 'evil
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop))
 
-(setq vterm-max-scrollback 10000)
+(setq vterm-max-scrollback 100000)
+
+(defun my/project-try (dir)
+  (let ((root (locate-dominating-file dir ".project.el")))
+    (when root
+      (cons 'transient root))))
+
+(add-hook 'project-find-functions #'my/project-try)
