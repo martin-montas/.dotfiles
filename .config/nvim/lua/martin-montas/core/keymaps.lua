@@ -71,5 +71,30 @@ vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
 vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
 
+vim.keymap.set("n", "<leader>c", function()
+  vim.cmd("w")
+
+  vim.system({ "make" }, { text = true }, function(obj)
+    vim.schedule(function()
+      vim.notify(obj.stdout .. obj.stderr)
+    end)
+  end)
+end)
 
 vim.keymap.set('n', '<leader>o', ':e ~/personal/slipbox/org/tasks.org<CR>')
+
+vim.keymap.set("n", "<leader>c", function()
+  vim.cmd("w")
+
+  local cmd = vim.fn.input("Compile command: ", "make ")
+
+  vim.system(
+    vim.split(cmd, " "),
+    { text = true },
+    function(obj)
+      vim.schedule(function()
+        vim.notify(obj.stdout .. obj.stderr)
+      end)
+    end
+  )
+end)

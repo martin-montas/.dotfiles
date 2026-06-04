@@ -21,7 +21,7 @@ o.relativenumber = true
 o.signcolumn = "yes:2"
 o.cursorline = true
 
-vim.api.nvim_command('colorscheme default')
+vim.api.nvim_command('colorscheme broduo')
 -- Better editing experience
 o.expandtab = true
 o.smarttab = true

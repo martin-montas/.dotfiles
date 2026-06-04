@@ -2,10 +2,10 @@ gtk-single-instance = true
 
 font-family = Iosevka 
 font-style = bold
-font-size = 17
+font-size = 13.5
 
 # ghostty +list-themes to change theme
-theme ="iTerm2 Dark Background"
+theme ="CGA"
 
 term = xterm-256color
 cursor-style = block

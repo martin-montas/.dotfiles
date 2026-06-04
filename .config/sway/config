@@ -9,6 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+
 # Nordic colors.
 set $black      #191D24
 set $gray0      #242933
@@ -227,9 +228,9 @@ exec_always {
 }
 
 
-input "type:keyboard" {
-    repeat_rate 50
-    repeat_delay 325
+input type:keyboard {
+    repeat_delay 180
+    repeat_rate  70 
 }
 # finds out, if available)
 #client.focused          #2e3436 #2e3436 #ffffff #2e3436   #2e3436

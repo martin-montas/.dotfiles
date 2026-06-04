@@ -45,6 +45,7 @@ alias l='eza -la --icons --group-directories-first'    # show hidden files
 alias ls='eza  --icons --group-directories-first'    # show hidden files
 alias lt='eza -T --icons'                               # tree view
 alias dotbare="$HOME/.dotbare/dotbare"
+alias same='~/SameBoy/build/bin/SDL/sameboy'
 
 fn() { ${EDITOR:-nvim} $(rg -n '.*' "$HOME/personal/slipbox" | fzf --layout=reverse --height 50% --ansi | sed -E 's/(.*):([0-9]+):.*/\1 +\2/g'); }
 

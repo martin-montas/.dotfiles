@@ -56,6 +56,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (tab-bar-mode 1)
+(setq auto-window-vscroll nil)
+(setq fast-but-imprecise-scrolling t)
 (setq org-startup-folded 'content)
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
@@ -91,12 +93,10 @@
 (setq projectile-project-root-files
       '("makefile"))
 
-
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
-
-(load-theme 'deeper-blue t)
+ (load-theme 'gruber-darker t)
 
 ;;; =========================
 ;;; EVIL CORE
