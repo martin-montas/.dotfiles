@@ -1,11 +1,11 @@
 gtk-single-instance = true
 
-font-family = Iosevka 
-font-style = bold
-font-size = 13.5
+font-family = Pragmasevka
+font-style = regular 
+font-size = 13.0
 
 # ghostty +list-themes to change theme
-theme ="CGA"
+theme = Firefox Dev
 
 term = xterm-256color
 cursor-style = block

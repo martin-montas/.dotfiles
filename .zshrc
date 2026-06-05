@@ -14,7 +14,7 @@ export EDITOR='nvim'
 export MOZ_ENABLE_WAYLAND=1
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="eastwood"
+ZSH_THEME="rixius"
 
 
 plugins=(git systemd)
@@ -63,7 +63,7 @@ XDG_SESSION_TYPE=wayland
 #eval "$(oh-my-posh init zsh)"
 # eval "$(oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/wholespace.omp.json)"
 bindkey -v
-export LS_COLORS="di=38;2;135;206;250"
+# export LS_COLORS="di=38;2;135;206;250"
 
 export DOTBARE_DIR="$HOME/.cfg"
 export DOTBARE_TREE="$HOME"

@@ -23,7 +23,7 @@
 ;;; =========================
 (defun my/ff-cwd ()
   (interactive)
-  (consult-find
+  (consult-fd
    (if buffer-file-name
        (file-name-directory buffer-file-name)
      default-directory)))
@@ -55,22 +55,23 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(tab-bar-mode 1)
+;; (tab-bar-mode 1)
 (setq auto-window-vscroll nil)
 (setq fast-but-imprecise-scrolling t)
 (setq org-startup-folded 'content)
 (global-display-line-numbers-mode 1)
+
 (setq display-line-numbers-type 'relative)
 
 
 (set-face-attribute 'default nil
-                    :font "Iosevka 15")
+                    :font "Pragmasevka 10")
 (setq inhibit-startup-screen t)
 
 (set-face-attribute 'default nil
-                    :family "Iosevka"
+                    :family "Pragmasevka"
                     :weight 'bold
-                    :height 150)
+                    :height 135)
 
 (add-hook 'c++-mode-hook
           (lambda ()
@@ -93,14 +94,17 @@
 (setq projectile-project-root-files
       '("makefile"))
 
+(setq consult-fd-args "fdfind --hidden --type f")
+
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
- (load-theme 'gruber-darker t)
+ (load-theme 'wheatgrass t)
 
 ;;; =========================
 ;;; EVIL CORE
 ;;; =========================
+(setq evil-collection-setup-minibuffer t)
 (setq evil-want-integration t)
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll t)
@@ -168,10 +172,6 @@ al motion)
 (defun my/new-vterm ()
   (interactive)
   (vterm (generate-new-buffer-name "*vterm*")))
-(setq consult-fd-args
-      "fd --color=never --full-path --hidden")
-
-
 (my/leader
   "h"  #'windmove-left
   "j"  #'windmove-down
@@ -179,12 +179,14 @@ al motion)
   "l"  #'windmove-right
 
   "ff" #'projectile-find-file
+
   "fg" #'consult-ripgrep
   "u"  #'consult-buffer
   "fr" #'consult-recent-file
   "fe" #'dired-create-empty-file
-  "i"  #'find-file
+  "i"  #'consult-fd
 
+  "p"  #'project-switch-project
   "p"  #'project-switch-project
   "-"  #'my/dired-here
   "gg" #'magit-status
@@ -327,3 +329,16 @@ al motion)
       (cons 'transient root))))
 
 (add-hook 'project-find-functions #'my/project-try)
+
+(setq consult-fd-args
+      "fdfind . --hidden --no-ignore --type f")
+(set-face-attribute 'font-lock-comment-face nil
+                    :weight 'bold
+                    :slant 'normal)
+
+(set-face-attribute 'font-lock-comment-delimiter-face nil
+                    :weight 'bold
+                    :slant 'normal)
+
+
+

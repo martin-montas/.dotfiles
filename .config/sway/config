@@ -9,7 +9,6 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-
 # Nordic colors.
 set $black      #191D24
 set $gray0      #242933
@@ -222,6 +221,7 @@ for_window [app_id=".*"] opacity $opacity
 # gaps
 gaps inner 0px
 
+
 exec_always {
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_DESKTOP=sway
@@ -229,8 +229,8 @@ exec_always {
 
 
 input type:keyboard {
-    repeat_delay 180
-    repeat_rate  70 
+    repeat_delay 250
+    repeat_rate 40
 }
 # finds out, if available)
 #client.focused          #2e3436 #2e3436 #ffffff #2e3436   #2e3436
@@ -257,3 +257,7 @@ exec systemctl --user import-environment \
     XDG_CURRENT_DESKTOP
 
 exec_always mako
+
+
+default_border pixel 1
+default_floating_border pixel 1
