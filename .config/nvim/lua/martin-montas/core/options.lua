@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python"},
+  pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python", "haskell"},
   callback = function() vim.treesitter.start() end,
 })
 

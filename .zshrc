@@ -70,3 +70,5 @@ export DOTBARE_TREE="$HOME"
 alias dotbare='git --git-dir=$DOTBARE_DIR --work-tree=$DOTBARE_TREE'
 
 alias db="dotbare"
+
+[ -f "/home/william/.ghcup/env" ] && . "/home/william/.ghcup/env" # ghcup-env

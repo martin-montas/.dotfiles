@@ -99,7 +99,7 @@
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
- (load-theme 'wheatgrass t)
+ (load-theme 'gruber-darker t)
 
 ;;; =========================
 ;;; EVIL CORE
