@@ -34,7 +34,9 @@ set $mod Mod1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+
+# Perfect DOS VGA 437.ttf: Perfect DOS VGA 437:style=Regular
+font pango: Perfect DOS VGA 437 9
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -221,8 +223,7 @@ for_window [app_id=".*"] opacity $opacity
 # gaps
 gaps inner 0px
 
-default_border pixel 1
-default_floating_border pixel 1
+
 
 exec_always {
     export XDG_CURRENT_DESKTOP=sway
@@ -232,7 +233,7 @@ exec_always {
 
 input type:keyboard {
     repeat_delay 250
-    repeat_rate 45
+    repeat_rate 40
 }
 # finds out, if available)
 #client.focused          #2e3436 #2e3436 #ffffff #2e3436   #2e3436

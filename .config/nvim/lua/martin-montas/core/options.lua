@@ -21,7 +21,7 @@ o.relativenumber = true
 o.signcolumn = "yes:2"
 o.cursorline = true
 
-vim.api.nvim_command('colorscheme tempus_tempest')
+-- vim.api.nvim_command('colorscheme tempus_tempest')
 -- Better editing experience
 o.expandtab = true
 o.smarttab = true
@@ -102,3 +102,4 @@ vim.api.nvim_set_hl(0, "Comment", {
     italic = false,
 })
 vim.opt.showtabline = 2
+

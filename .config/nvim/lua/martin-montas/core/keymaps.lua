@@ -61,26 +61,6 @@ vim.keymap.set("n", "<leader>o", function()
   })
 end)
 
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<C-s>", ui.toggle_quick_menu)
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
-
-vim.keymap.set("n", "<leader>c", function()
-  vim.cmd("w")
-
-  vim.system({ "make" }, { text = true }, function(obj)
-    vim.schedule(function()
-      vim.notify(obj.stdout .. obj.stderr)
-    end)
-  end)
-end)
-
 vim.keymap.set('n', '<leader>o', ':e ~/personal/slipbox/org/tasks.org<CR>')
 
 vim.keymap.set("n", "<leader>c", function()
@@ -98,3 +78,10 @@ vim.keymap.set("n", "<leader>c", function()
     end
   )
 end)
+
+vim.keymap.set('n', '<leader>i', ':tabnew .<CR>')
+vim.keymap.set('n', '<leader>n', ':tabnext<CR>')
+vim.keymap.set('n', '<leader>7', ':tabn 1<CR>')
+vim.keymap.set('n', '<leader>8', ':tabn 2<CR>')
+vim.keymap.set('n', '<leader>9', ':tabn 3<CR>')
+vim.keymap.set('n', '<leader>0', ':tabn 4<CR>')
