@@ -23,6 +23,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
 
 map('n','<leader>h', ':wincmd h<CR>')
 map('n','<leader>t', ':NvimTreeToggle<CR>')
@@ -49,6 +52,9 @@ vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+
+vim.keymap.set("n", "j", "jzz")
+vim.keymap.set("n", "k", "kzz")
 
 vim.keymap.set("n", "<leader>o", function()
   local url = vim.fn.expand("<cfile>")
