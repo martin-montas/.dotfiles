@@ -4,7 +4,7 @@ local g = vim.g
 vim.api.nvim_command("set jumpoptions+=view")
 vim.api.nvim_command("set nowrap")
 vim.api.nvim_command("filetype plugin indent on")
-o.termguicolors = true
+o.termguicolors = false
 g.background = "dark"
 vim.api.nvim_command("syntax on")
 -- Decrease update time
@@ -97,9 +97,9 @@ vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
 
 
-vim.api.nvim_set_hl(0, "Comment", {
-    bold = true,
-    italic = false,
-})
+-- vim.api.nvim_set_hl(0, "Comment", {
+--     bold = true,
+--     italic = false,
+-- })
 vim.opt.showtabline = 2
 

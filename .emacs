@@ -55,6 +55,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(global-hl-line-mode 1)
 ;; (tab-bar-mode 1)
 (setq auto-window-vscroll nil)
 (setq fast-but-imprecise-scrolling t)
@@ -99,7 +100,7 @@
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
- (load-theme 'gruber-darker t)
+ (load-theme 'wheatgrass t)
 
 ;;; =========================
 ;;; EVIL CORE
@@ -215,6 +216,8 @@ al motion)
   (general-create-definer my/ctrl-a-leader
     :states '(normal visual emacs)
     :keymaps 'override
+
+
     :prefix "C-a")
 
  ;; bindings

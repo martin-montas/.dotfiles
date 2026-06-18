@@ -178,6 +178,11 @@ workspace 3 output      DP-5
 workspace 5 output      DP-5
 workspace 10 output     DP-5
 
+# takes screenshot
+bindsym $mod+Shift+s exec sh -c 'grim -g "$(slurp)" ~/Pictures/screenshot.png'
+
+
+
 # reload the configuration file
 bindsym $mod+Shift+r reload
 # exit i3 (logs you out of your X session)
@@ -230,11 +235,10 @@ exec_always {
     export XDG_SESSION_DESKTOP=sway
 }
 
-input "type:keyboard" {
-    repeat_delay 200
-    repeat_rate 50
+input type:keyboard {
+    repeat_delay 245
+    repeat_rate 40
 }
-
 #output * background $HOME/personal/red-mountains.jpg fill
 exec dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY SWAYSOCK
 exec systemctl --user import-environment XDG_CURRENT_DESKTOP WAYLAND_DISPLAY SWAYSOCK
