@@ -100,7 +100,7 @@
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
- (load-theme 'wheatgrass t)
+ (load-theme 'deeper-blue t)
 
 ;;; =========================
 ;;; EVIL CORE

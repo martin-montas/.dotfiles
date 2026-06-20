@@ -4,7 +4,7 @@ local g = vim.g
 vim.api.nvim_command("set jumpoptions+=view")
 vim.api.nvim_command("set nowrap")
 vim.api.nvim_command("filetype plugin indent on")
-o.termguicolors = false
+o.termguicolors = true
 g.background = "dark"
 vim.api.nvim_command("syntax on")
 -- Decrease update time
@@ -84,10 +84,10 @@ vim.api.nvim_create_autocmd("FileType", {
         ]])
 	end,
 })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python", "haskell"},
-  callback = function() vim.treesitter.start() end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python", "haskell"},
+--   callback = function() vim.treesitter.start() end,
+-- })
 
 vim.opt.hlsearch = true
 -- vim.api.nvim_command('set laststatus=0')
@@ -103,3 +103,14 @@ vim.opt.expandtab = true -- Use spaces instead of tabs
 -- })
 vim.opt.showtabline = 2
 
+vim.treesitter.start = function()
+end
+vim.api.nvim_create_autocmd({"FileType", "BufEnter"}, {
+  callback = function()
+    vim.treesitter.stop()
+  end,
+})
+
+on_attach = function(client)
+  client.server_capabilities.semanticTokensProvider = nil
+end

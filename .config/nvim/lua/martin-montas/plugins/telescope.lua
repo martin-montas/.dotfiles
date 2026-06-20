@@ -3,7 +3,7 @@ return {
         branch = "0.1.x",
         dependencies = {
                 "nvim-lua/plenary.nvim",
-                "nvim-treesitter/nvim-treesitter",
+                -- "nvim-treesitter/nvim-treesitter",
         },
         config = function()
                 local telescope = require("telescope")
