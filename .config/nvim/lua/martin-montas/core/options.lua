@@ -2,7 +2,9 @@ local o = vim.o
 local g = vim.g
 
 vim.api.nvim_command("set jumpoptions+=view")
+vim.api.nvim_command("hi Normal guifg=#969696")
 vim.api.nvim_command("set nowrap")
+
 vim.api.nvim_command("filetype plugin indent on")
 o.termguicolors = true
 g.background = "dark"

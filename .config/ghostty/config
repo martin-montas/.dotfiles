@@ -1,11 +1,11 @@
 gtk-single-instance = true
 
-font-family = Perfect DOS VGA 437
-font-style = regular 
-font-size = 13.0
+font-family = Flexi IBM VGA True (437)
+font-style = Regular 
+font-size = 16.0
 
 # ghostty +list-themes to change theme
-theme = Firefox Dev
+theme = CGA
 
 term = xterm-256color
 cursor-style = block
