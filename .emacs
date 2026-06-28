@@ -67,11 +67,11 @@
 
 
 (set-face-attribute 'default nil
-                    :font "Perfect DOS VGA 437 10")
+                    :font "Iosevka 10")
 (setq inhibit-startup-screen t)
 
 (set-face-attribute 'default nil
-                    :family "Perfect DOS VGA 437"
+                    :family "Iosevka"
                     :weight 'bold
                     :height 135)
 
@@ -101,7 +101,7 @@
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
-;;(load-theme 'light-blue t)
+(load-theme 'gruber-darker t)
 
 ;;; =========================
 ;;; EVIL CORE

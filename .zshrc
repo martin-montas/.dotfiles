@@ -13,7 +13,7 @@ export KUBECONFIG=$HOME/.kube/config
 export EDITOR='nvim'
 export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER=wayland
-
+export LS_COLORS="di=94"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="rixius"
 

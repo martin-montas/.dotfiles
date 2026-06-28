@@ -99,10 +99,10 @@ vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
 
 
--- vim.api.nvim_set_hl(0, "Comment", {
---     bold = true,
---     italic = false,
--- })
+vim.api.nvim_set_hl(0, "Comment", {
+    bold = true,
+    italic = false,
+})
 vim.opt.showtabline = 2
 
 vim.treesitter.start = function()
@@ -116,3 +116,11 @@ vim.api.nvim_create_autocmd({"FileType", "BufEnter"}, {
 on_attach = function(client)
   client.server_capabilities.semanticTokensProvider = nil
 end
+
+-- vim.api.nvim_set_hl(0, "@function", {
+--     fg = "#969696"
+-- })
+-- 
+-- vim.api.nvim_set_hl(0, "@function.call", {
+--     fg = "#969696"
+-- })
