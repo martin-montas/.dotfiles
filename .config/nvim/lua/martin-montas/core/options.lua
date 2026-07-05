@@ -2,7 +2,7 @@ local o = vim.o
 local g = vim.g
 
 vim.api.nvim_command("set jumpoptions+=view")
-vim.api.nvim_command("hi Normal guifg=#969696")
+-- vim.api.nvim_command("hi Normal guifg=#969696")
 vim.api.nvim_command("set nowrap")
 
 vim.api.nvim_command("filetype plugin indent on")
@@ -55,7 +55,8 @@ o.swapfile = false
 
 o.history = 50
 g.netrw_banner = 0
-g.netrw_liststyle = 0
+g.netrw_liststyle = 1
+vim.g.netrw_timefmt = "%Y-%m-%d %H:%M"
 g.netrw_browse_split = 0
 g.netrw_altv = 1
 g.netrw_winsize = 12
@@ -86,10 +87,10 @@ vim.api.nvim_create_autocmd("FileType", {
         ]])
 	end,
 })
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python", "haskell"},
---   callback = function() vim.treesitter.start() end,
--- })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'go' ,'python', 'lua', 'bash', "c", "cpp" , "asm", "python", "haskell"},
+  callback = function() vim.treesitter.start() end,
+})
 
 vim.opt.hlsearch = true
 -- vim.api.nvim_command('set laststatus=0')
@@ -99,10 +100,6 @@ vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
 vim.opt.expandtab = true -- Use spaces instead of tabs
 
 
-vim.api.nvim_set_hl(0, "Comment", {
-    bold = true,
-    italic = false,
-})
 vim.opt.showtabline = 2
 
 vim.treesitter.start = function()
@@ -124,3 +121,11 @@ end
 -- vim.api.nvim_set_hl(0, "@function.call", {
 --     fg = "#969696"
 -- })
+--
+local on_attach = function(client, bufnr)
+  -- disable specific LSPs
+  if client.name == "tsserver" then
+    client.enable()
+    return
+  end
+end

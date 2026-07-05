@@ -41,9 +41,9 @@ alias em='emacs -nw'
 alias vi='nvim'
 
 alias ts='tailscale'
-alias ll='eza -lh --icons --group-directories-first'    # long list
-alias l='eza -la --icons --group-directories-first'    # show hidden files
-alias ls='eza  --icons --group-directories-first'    # show hidden files
+alias ll='lsd -l'    # long list
+alias l='lsd -la'    # show hidden files
+alias ls='lsd'    # show hidden files
 alias lt='eza -T --icons'                               # tree view
 alias dotbare="$HOME/.dotbare/dotbare"
 alias same='~/SameBoy/build/bin/SDL/sameboy'

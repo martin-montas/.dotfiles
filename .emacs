@@ -56,8 +56,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (global-hl-line-mode 1)
- (tab-bar-mode 1)
-(set-background-color "black")
+(tab-bar-mode -1)
+;; (set-background-color "#000000")
 (setq auto-window-vscroll nil)
 (setq fast-but-imprecise-scrolling t)
 (setq org-startup-folded 'content)
@@ -67,11 +67,11 @@
 
 
 (set-face-attribute 'default nil
-                    :font "Iosevka 10")
+                    :font "Pragmasevka 10")
 (setq inhibit-startup-screen t)
 
 (set-face-attribute 'default nil
-                    :family "Iosevka"
+                    :family "Pragmasevka"
                     :weight 'bold
                     :height 135)
 
@@ -101,7 +101,7 @@
 ;;; =========================
 ;;; THEME (ONLY ONE ACTIVE)
 ;;; =========================
-(load-theme 'gruber-darker t)
+(load-theme 'wheatgrass t)
 
 ;;; =========================
 ;;; EVIL CORE
