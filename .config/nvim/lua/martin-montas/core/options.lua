@@ -2,11 +2,11 @@ local o = vim.o
 local g = vim.g
 
 vim.api.nvim_command("set jumpoptions+=view")
--- vim.api.nvim_command("hi Normal guifg=#969696")
+-- vim.api.nvim_command("hi Normal guibg=#101012")
 vim.api.nvim_command("set nowrap")
 
 vim.api.nvim_command("filetype plugin indent on")
-o.termguicolors = true
+o.termguicolors = false
 g.background = "dark"
 vim.api.nvim_command("syntax on")
 -- Decrease update time
