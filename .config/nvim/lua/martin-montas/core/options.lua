@@ -6,7 +6,7 @@ vim.api.nvim_command("set jumpoptions+=view")
 vim.api.nvim_command("set nowrap")
 
 vim.api.nvim_command("filetype plugin indent on")
-o.termguicolors = false
+o.termguicolors = true
 g.background = "dark"
 vim.api.nvim_command("syntax on")
 -- Decrease update time
