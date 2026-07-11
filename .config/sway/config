@@ -61,7 +61,7 @@ set $sn DP-5
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec fuzzel
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -242,6 +242,10 @@ input type:keyboard {
 #output * background $HOME/personal/red-mountains.jpg fill
 exec dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP=sway WAYLAND_DISPLAY SWAYSOCK
 exec systemctl --user import-environment XDG_CURRENT_DESKTOP WAYLAND_DISPLAY SWAYSOCK
+
+default_border none
+default_floating_border none
+
 
 output * bg /home/william/personal/black.jpg fill
 exec_always --no-startup-id dbus-launch --sh-syntax

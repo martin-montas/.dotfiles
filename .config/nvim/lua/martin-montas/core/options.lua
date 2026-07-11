@@ -2,12 +2,12 @@ local o = vim.o
 local g = vim.g
 
 vim.api.nvim_command("set jumpoptions+=view")
--- vim.api.nvim_command("hi Normal guibg=#101012")
+vim.api.nvim_command("hi Normal guifg=#aaa592")
 vim.api.nvim_command("set nowrap")
 
 vim.api.nvim_command("filetype plugin indent on")
 o.termguicolors = true
-g.background = "dark"
+g.background = false
 vim.api.nvim_command("syntax on")
 -- Decrease update time
 o.timeoutlen = 500
@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.opt.hlsearch = true
--- vim.api.nvim_command('set laststatus=0')
+vim.api.nvim_command('hi StatusLine guibg=#8f8885 guifg=#101010')
 
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
 vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
