@@ -3,7 +3,7 @@ gtk-single-instance = true
 # font-family = Fantasque Sans Mono
 font-family = Hack
 font-style = regular
-font-size = 16.5
+font-size = 14.0
 
 # ghostty +list-themes to change theme
 theme = Firefox Dev
