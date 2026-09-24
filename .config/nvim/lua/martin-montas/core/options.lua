@@ -2,7 +2,7 @@ local o = vim.o
 local g = vim.g
 
 vim.api.nvim_command("set jumpoptions+=view")
-vim.api.nvim_command("hi Normal guifg=#aaa592")
+-- vim.api.nvim_command("hi Normal guifg=#aaa592")
 vim.api.nvim_command("set nowrap")
 
 vim.api.nvim_command("filetype plugin indent on")
@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.opt.hlsearch = true
-vim.api.nvim_command('hi StatusLine guibg=#8f8885 guifg=#101010')
+vim.api.nvim_command('hi StatusLine guibg=#707070 guifg=#101010')
 
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
 vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
@@ -114,14 +114,14 @@ on_attach = function(client)
   client.server_capabilities.semanticTokensProvider = nil
 end
 
--- vim.api.nvim_set_hl(0, "@function", {
---     fg = "#969696"
--- })
--- 
--- vim.api.nvim_set_hl(0, "@function.call", {
---     fg = "#969696"
--- })
---
+vim.api.nvim_set_hl(0, "@function", {
+    fg = "#969696"
+})
+
+vim.api.nvim_set_hl(0, "@function.call", {
+    fg = "#969696"
+})
+
 local on_attach = function(client, bufnr)
   -- disable specific LSPs
   if client.name == "tsserver" then

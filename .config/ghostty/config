@@ -6,7 +6,7 @@ font-style = regular
 font-size = 14.0
 
 # ghostty +list-themes to change theme
-theme = Firefox Dev
+theme = Builtin Tango Light
 
 term = xterm-256color
 cursor-style = block
