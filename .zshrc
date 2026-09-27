@@ -16,7 +16,7 @@ export SDL_VIDEODRIVER=wayland
 export LS_COLORS="di=94"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="rixius"
-ZSH_THEME="dallas"
+ZSH_THEME="daveverwer"
 
 
 plugins=(git systemd)
@@ -42,13 +42,13 @@ alias em='emacs -nw'
 alias vi='nvim'
 
 alias ts='tailscale'
-alias ll='ls -l'    # long list
-alias l='ls -la'    # show hidden files
-alias ls='ls'    # show hidden files
-alias lt='ls -T --icons'                               # tree view
+alias ll='lsd -l'    # long list
+alias l='lsd -la'    # show hidden files
+alias ls='lsd'    # show hidden files
+alias lt='lsd -T --icons'                               # tree view
 alias dotbare="$HOME/.dotbare/dotbare"
 
-fn() { ${EDITOR:-nvim} $(rg -n '.*' "$HOME/personal/slipbox" | fzf --layout=reverse --height 50% --ansi | sed -E 's/(.*):([0-9]+):.*/\1 +\2/g'); }
+fn() { ${EDITOR:-nvim} $(rg -n '.*' "$HOME/personal/slipbox" | fzf --layout=reverse --height 50% --ansi | sed -E 's/(.*):([]+):.*/\1 +\2/g'); }
 
 alias gs='git status'
 alias k='kubectl'
