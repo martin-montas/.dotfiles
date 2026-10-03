@@ -19,7 +19,7 @@ export LS_COLORS="di=94"
 ZSH_THEME="daveverwer"
 
 
-plugins=(git systemd)
+plugins=(git systemd ufw ansible)
 
 source $ZSH/oh-my-zsh.sh
 # Initialize zoxide for Zsh
