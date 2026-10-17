@@ -61,8 +61,8 @@ bindkey -M viins '^P' paste_from_clipboard
 
 export XDG_CURRENT_DESKTOP=sway
 XDG_SESSION_TYPE=wayland
-# eval "$(oh-my-posh init zsh)"
-# eval "$(oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/emodipt.omp.json)"
+eval "$(oh-my-posh init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.cache/oh-my-posh/themes/cinnamon.omp.json)"
 bindkey -v
 # export LS_COLORS="di=38;2;135;206;250"
 
@@ -73,4 +73,4 @@ alias dotbare='git --git-dir=$DOTBARE_DIR --work-tree=$DOTBARE_TREE'
 alias db="dotbare"
 
 [ -f "/home/william/.ghcup/env" ] && . "/home/william/.ghcup/env" # ghcup-env
-neofetch
+# neofetch

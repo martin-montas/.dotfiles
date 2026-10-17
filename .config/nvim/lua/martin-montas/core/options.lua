@@ -2,8 +2,8 @@ local o = vim.o
 local g = vim.g
 
 vim.api.nvim_command("set jumpoptions+=view")
-vim.api.nvim_command("hi Normal guibg=#010101 guifg=#939393")
-vim.api.nvim_command("hi Comment guibg=#010101 guifg=#008080")
+-- vim.api.nvim_command("hi Normal guibg=#101010")
+-- vim.api.nvim_command("hi Comment guibg=#010101 guifg=#008080")
 vim.api.nvim_command("set nowrap")
 
 vim.api.nvim_command("filetype plugin indent on")
@@ -24,7 +24,6 @@ o.relativenumber = true
 o.signcolumn = "yes:2"
 o.cursorline = true
 
--- vim.api.nvim_command('colorscheme tempus_tempest')
 -- Better editing experience
 o.expandtab = true
 o.smarttab = true
@@ -96,33 +95,24 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.opt.hlsearch = true
 vim.api.nvim_command('hi StatusLine guibg=#707070 guifg=#1A1A1A')
 
-vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
-vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
-vim.opt.expandtab = true -- Use spaces instead of tabs
-
+vim.opt.tabstop = 4         -- Number of spaces that a <Tab> in the file counts for
+vim.opt.shiftwidth = 4      -- Number of spaces to use for each step of (auto)indent
+vim.opt.expandtab = true    -- Use spaces instead of tabs
 
 vim.opt.showtabline = 2
-
-vim.treesitter.start = function()
-end
-vim.api.nvim_create_autocmd({"FileType", "BufEnter"}, {
-  callback = function()
-    vim.treesitter.stop()
-  end,
-})
 
 on_attach = function(client)
   client.server_capabilities.semanticTokensProvider = nil
 end
 
-vim.api.nvim_set_hl(0, "@function", {
-    fg = "#969696"
-})
-
-vim.api.nvim_set_hl(0, "@function.call", {
-    fg = "#969696"
-})
-
+-- vim.api.nvim_set_hl(0, "@function", {
+--     fg = "#969696"
+-- })
+-- 
+-- vim.api.nvim_set_hl(0, "@function.call", {
+--     fg = "#969696"
+-- })
+-- 
 local on_attach = function(client, bufnr)
   -- disable specific LSPs
   if client.name == "tsserver" then
